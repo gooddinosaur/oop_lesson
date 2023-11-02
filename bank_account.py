@@ -19,13 +19,18 @@ class AccountDB:
         for account in self.account_database:
             if account.account_number == account_num:
                 return account
-        return None
+        return Account("0","trash","pk",1000000)
 
     def __str__(self):
         s = ''
         for account in self.account_database:
             s += str(account) + ", "
         return s
+
+    def delete_account(self, account_name):
+        for account in self.account_database:
+            if account.account_name == account_name:
+                self.account_database.remove(account)
 
 
 class Account:
@@ -36,7 +41,10 @@ class Account:
         self.balance = balance
 
     def deposit(self, amount):
-        self.balance += amount
+        if self.type != "trash":
+            self.balance += amount
+        else:
+            print("Account Not found")
 
     def withdraw(self, amount):
         if self.balance >= amount:
@@ -65,4 +73,6 @@ print(my_account_DB)
 my_account_DB.search_public("0003").withdraw(100)
 print(my_account_DB)
 my_account_DB.search_public("0010").deposit(50)
+print(my_account_DB)
+my_account_DB.delete_account("Mark Hill")
 print(my_account_DB)
