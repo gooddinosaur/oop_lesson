@@ -1,5 +1,6 @@
 account_database = []
 
+
 def create_account(num, type, name, init_balance):
     index = search_account_db(num)
     if index == -1:
@@ -12,6 +13,7 @@ def create_account(num, type, name, init_balance):
     else:
         print("Account", num, "already exists")
 
+
 def delete_account(num):
     index = search_account_db(num)
     if index != -1:
@@ -20,31 +22,41 @@ def delete_account(num):
     else:
         print(num, "invalid account number; nothing to be deleted.")
 
+
 def search_account_db(num):
     for i in range(len(account_database)):
         if account_database[i]["account_number"] == num:
             return i
     return -1
 
+
 def deposit(account_num, amount):
     index = search_account_db(account_num)
     if index != -1:
-        print("Depositing", amount, "to", account_database[index]["account_number"])
+        print("Depositing", amount, "to",
+              account_database[index]["account_number"])
         account_database[index]["balance"] += amount
     else:
-        print(account_num, "invalid account number; no deposit action performed.")
+        print(account_num,
+              "invalid account number; no deposit action performed.")
+
 
 def withdraw(account_num, amount):
     index = search_account_db(account_num)
     if index != -1:
         if account_database[index]["balance"] >= amount:
-            print("Withdrawing", amount, "from", account_database[index]["account_number"])
+            print("Withdrawing", amount, "from",
+                  account_database[index]["account_number"])
             account_database[index]["balance"] -= amount
         else:
-            print("withdrawal amount", amount, "exceeds the balance of", account_database[index]["balance"], "for", account_num, "account.")
+            print("withdrawal amount", amount, "exceeds the balance of",
+                  account_database[index]["balance"], "for", account_num,
+                  "account.")
     else:
-        print(account_num, "invalid account number; no withdrawal action performed.")
-        
+        print(account_num,
+              "invalid account number; no withdrawal action performed.")
+
+
 def show_account(account_num):
     index = search_account_db(account_num)
     if index != -1:
@@ -52,6 +64,7 @@ def show_account(account_num):
         print(account_database[index])
     else:
         print(account_num, "invalid account number; nothing to be shown for.")
+
 
 create_account("0000", "saving", "David Patterson", 1000)
 create_account("0001", "checking", "John Hennessy", 2000)
